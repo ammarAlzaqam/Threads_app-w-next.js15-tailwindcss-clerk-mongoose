@@ -80,7 +80,8 @@ export default function AccountProfile({ user, btnTitle }: Props) {
     const hasImageChanged = isBase64Image(blob);
 
     if (hasImageChanged) {
-      const imgRes = await startUpload(files);
+      const imgQuery = startUpload(files);
+      const imgRes = await imgQuery;
       console.log("Upload Result:", imgRes);
       if (imgRes && imgRes[0]) {
         profile_photo = imgRes[0].ufsUrl;
