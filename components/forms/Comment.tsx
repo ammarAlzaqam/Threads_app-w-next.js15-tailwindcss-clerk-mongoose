@@ -50,12 +50,7 @@ export default function Comment({
   }: z.infer<typeof CommentValidationSchema>) => {
     try {
       setLoading(true);
-      await addCommentToThread({
-        commentText: thread,
-        userId: currentUserId,
-        threadId,
-        path: pathname,
-      });
+      await addCommentToThread(threadId, thread, currentUserId, pathname);
 
       form.reset();
     } catch (e) {

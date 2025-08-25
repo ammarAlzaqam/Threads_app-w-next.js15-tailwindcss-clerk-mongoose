@@ -55,7 +55,7 @@
   }
 
   .searchbar {
-    @apply flex gap-1 rounded-lg bg-dark-3 px-4 py-2;
+    @apply flex items-center gap-1 rounded-lg bg-dark-3 px-4 py-2;
   }
 
   .searchbar_input {
@@ -96,6 +96,14 @@
 }
 
 @layer utilities {
+  .animate-zoom[data-state="open"] {
+    @apply animate-in zoom-in-0 duration-500;
+  }
+
+  .animate-zoom[data-state="closed"] {
+    @apply opacity-0 pointer-events-none duration-500;
+  }
+
   .css-invert {
     @apply invert-[50%] brightness-200;
   }

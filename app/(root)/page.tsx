@@ -1,10 +1,16 @@
 import ThreadCard from "@/components/cards/ThreadCard";
+import PaginationPage from "@/components/shared/Pagination";
 import { fetchPosts } from "@/lib/actions/thread.actions";
 import Thread from "@/lib/models/thread.model";
 import { currentUser } from "@clerk/nextjs/server";
 
-export default async function Home() {
-  const { posts, isNext } = await fetchPosts(1, 30);
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ page: string }>;
+}) {
+  const { page } = await searchParams;
+  const { posts, isNext } = await fetchPosts(parseInt(page) || 1, 1);
   const user = await currentUser();
   return (
     <>
@@ -22,10 +28,11 @@ export default async function Home() {
               content={post.text}
               author={post.author}
               community={post.community}
-              createAt={post.createdAt}
+              createdAt={post.createdAt}
               comments={post.children}
             />
           ))}
+          <PaginationPage isNext={isNext} />
         </div>
       )}
     </>

@@ -1,3 +1,4 @@
+import { formatDateString } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -26,7 +27,7 @@ interface Props {
   content: string;
   author: Author;
   community: Community | null;
-  createAt: string;
+  createdAt: string;
   comments: Comment[];
   isComment?: boolean;
 }
@@ -38,7 +39,7 @@ export default function ThreadCard({
   content,
   author,
   community,
-  createAt,
+  createdAt,
   comments,
   isComment,
 }: Props) {
@@ -113,7 +114,53 @@ export default function ThreadCard({
             </div>
           </div>
         </div>
+
+        {/* //TODO: DeleteThread */}
+        {/* //TODO: Show comment logos */}
       </div>
+
+      {comments.length > 0 && (
+        <Link href={`/thread/${id}`}>
+          <div className="flex items-center gap-2 mt-3">
+            <div className="flex items-center">
+              {comments.map((comment, index) => (
+                <Image
+                  key={index}
+                  src={comment.author.image}
+                  alt={`user_${index}`}
+                  width={28}
+                  height={28}
+                  className={`${
+                    index !== 0 && "-ml-4"
+                  } rounded-full object-cover`}
+                />
+              ))}
+            </div>
+            <p className="mt-1 text-subtle-medium text-gray-1">
+              {comments.length} replies
+            </p>
+          </div>
+        </Link>
+      )}
+
+      {!isComment && community && (
+        <Link
+          href={`/communities/${community.id}`}
+          className="mt-5 flex items-center"
+        >
+          <p className="text-subtle-medium text-gray-1">
+            {formatDateString(createdAt)} - {community.name} Community
+          </p>
+
+          <Image
+            src={community.image}
+            alt={community.name}
+            width={14}
+            height={14}
+            className="ml-1 rounded-full object-cover"
+          />
+        </Link>
+      )}
     </article>
   );
 }
