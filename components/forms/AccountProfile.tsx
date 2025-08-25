@@ -99,6 +99,7 @@ export default function AccountProfile({ user, btnTitle }: Props) {
         bio,
         path: pathname,
       });
+
       pathname === "/profile/edit" ? router.back() : router.push("/");
     } catch (e) {
       console.log(e);
