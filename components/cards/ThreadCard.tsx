@@ -119,7 +119,7 @@ export default function ThreadCard({
         {/* //TODO: Show comment logos */}
       </div>
 
-      {comments.length > 0 && (
+      {!isComment && comments.length > 0 && (
         <Link href={`/thread/${id}`}>
           <div className="flex items-center gap-2 mt-3">
             <div className="flex items-center">
