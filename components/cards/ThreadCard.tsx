@@ -147,7 +147,7 @@ export default function ThreadCard({
                             (CommentsUniqueAuthor.length < 7
                               ? "-ml-4"
                               : "-ml-5")
-                          } rounded-full object-cover hover:z-100`}
+                          } rounded-full object-cover border-l-2 border-light-2 hover:z-100 hover:scale-120 hover:border-none transition`}
                         />
                       </TooltipTrigger>
                       <TooltipContent>
