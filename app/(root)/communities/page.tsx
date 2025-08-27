@@ -29,7 +29,7 @@ export default async function Page({
   const { communities, isNext } = await fetchCommunities({
     searchString: query,
     pageNumber: parseInt(page) || 1,
-    pageSize: 1,
+    pageSize: 5,
   });
 
   return (

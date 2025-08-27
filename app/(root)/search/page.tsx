@@ -28,7 +28,7 @@ export default async function Page({
     userId: user.id,
     searchString: query,
     pageNumber: parseInt(page) || 1,
-    pageSize: 1,
+    pageSize: 7,
   });
 
   return (
