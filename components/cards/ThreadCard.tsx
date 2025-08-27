@@ -1,6 +1,12 @@
 import { formatDateString } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 
 type Author = {
   name: string;
@@ -16,6 +22,8 @@ type Community = {
 
 type Comment = {
   author: {
+    id: string;
+    name: string;
     image: string;
   };
 };
@@ -43,8 +51,8 @@ export default function ThreadCard({
   comments,
   isComment,
 }: Props) {
-  const commentsAuthImg = comments.map((comment) => comment.author.image);
-  const CommentsUniqueImg = [...new Set(commentsAuthImg)];
+  const commentsAuthor = comments.map((comment) => comment.author);
+  const CommentsUniqueAuthor = [...new Set(commentsAuthor)];
   return (
     <article
       className={`flex w-full flex-col rounded-xl ${
@@ -125,20 +133,29 @@ export default function ThreadCard({
         <Link href={`/thread/${id}`}>
           <div className="flex items-center gap-2 mt-3">
             <div className="flex items-center">
-              {
-              CommentsUniqueImg.length < 10 &&
-                CommentsUniqueImg.map((authorImg, index) => (
-                  <Image
-                    key={index}
-                    src={authorImg}
-                    alt={`user_${index}`}
-                    width={28}
-                    height={28}
-                    className={`${
-                      index !== 0 &&
-                      (CommentsUniqueImg.length < 7 ? "-ml-4" : "-ml-5")
-                    } rounded-full object-cover`}
-                  />
+              {CommentsUniqueAuthor.length < 10 &&
+                CommentsUniqueAuthor.map((author, index) => (
+                  <TooltipProvider key={author.id}>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Image
+                          src={author.image}
+                          alt={`user_${index}`}
+                          width={28}
+                          height={28}
+                          className={`${
+                            index !== 0 &&
+                            (CommentsUniqueAuthor.length < 7
+                              ? "-ml-4"
+                              : "-ml-5")
+                          } rounded-full object-cover hover:z-100`}
+                        />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{author.name}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 ))}
             </div>
             <p className="mt-1 text-subtle-medium text-gray-1">
