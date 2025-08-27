@@ -10,7 +10,7 @@ export default async function Home({
   searchParams: Promise<{ page: string }>;
 }) {
   const { page } = await searchParams;
-  const { posts, isNext } = await fetchPosts(parseInt(page) || 1, 1);
+  const { posts, isNext } = await fetchPosts(parseInt(page) || 1, 10);
   const user = await currentUser();
   return (
     <>

@@ -22,7 +22,6 @@ type Community = {
 
 type Comment = {
   author: {
-    id: string;
     name: string;
     image: string;
   };
@@ -135,7 +134,7 @@ export default function ThreadCard({
             <div className="flex items-center">
               {CommentsUniqueAuthor.length < 10 &&
                 CommentsUniqueAuthor.map((author, index) => (
-                  <TooltipProvider key={author.id}>
+                  <TooltipProvider key={index}>
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <Image
