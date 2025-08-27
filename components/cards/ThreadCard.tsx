@@ -43,8 +43,8 @@ export default function ThreadCard({
   comments,
   isComment,
 }: Props) {
-  const commentsAuthImg = comments.map((comment) => comment.author.image)
-  const CommentsUniqueImg = [...new Set(commentsAuthImg)]
+  const commentsAuthImg = comments.map((comment) => comment.author.image);
+  const CommentsUniqueImg = [...new Set(commentsAuthImg)];
   return (
     <article
       className={`flex w-full flex-col rounded-xl ${
@@ -125,18 +125,21 @@ export default function ThreadCard({
         <Link href={`/thread/${id}`}>
           <div className="flex items-center gap-2 mt-3">
             <div className="flex items-center">
-              {CommentsUniqueImg.map((authorImg, index) => (
-                <Image
-                  key={index}
-                  src={authorImg}
-                  alt={`user_${index}`}
-                  width={28}
-                  height={28}
-                  className={`${
-                    index !== 0 && (CommentsUniqueImg.length < 7 ? "-ml-4" : "-ml-5")
-                  } rounded-full object-cover`}
-                />
-              ))}
+              {
+              CommentsUniqueImg.length < 10 &&
+                CommentsUniqueImg.map((authorImg, index) => (
+                  <Image
+                    key={index}
+                    src={authorImg}
+                    alt={`user_${index}`}
+                    width={28}
+                    height={28}
+                    className={`${
+                      index !== 0 &&
+                      (CommentsUniqueImg.length < 7 ? "-ml-4" : "-ml-5")
+                    } rounded-full object-cover`}
+                  />
+                ))}
             </div>
             <p className="mt-1 text-subtle-medium text-gray-1">
               {comments.length} replies
