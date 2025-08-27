@@ -4,7 +4,7 @@ import { communityTabs } from "@/constants";
 
 import ProfileHeader from "@/components/shared/ProfileHeader";
 import ThreadsTab from "@/components/shared/ThreadsTab";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { fetchCommunityDetails } from "@/lib/actions/community.actions";
 import UserCard from "@/components/cards/UserCard";
 
@@ -19,7 +19,7 @@ export default async function Page({
   if (!user) return null;
 
   const communityDetails = await fetchCommunityDetails(communityId);
-
+  console.log(`communityDetails: ${communityDetails}`);
   return (
     <section className="">
       <ProfileHeader
@@ -33,8 +33,8 @@ export default async function Page({
       />
 
       <div className="mt-9">
-        <Tabs defaultValue="threads" className="w-full">
-          <TabsList className="tab">
+        <Tabs defaultValue="threads">
+          <TabsList className="tab w-full">
             {communityTabs.map((tab) => (
               <TabsTrigger
                 key={tab.label}

@@ -3,7 +3,7 @@ import ThreadsTab from "@/components/shared/ThreadsTab";
 import { profileTabs } from "@/constants";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
@@ -34,8 +34,8 @@ export default async function Page({
       />
 
       <div className="mt-9">
-        <Tabs defaultValue="threads" className="w-full">
-          <TabsList className="tab">
+        <Tabs defaultValue="threads">
+          <TabsList className="tab w-full">
             {profileTabs.map((tab) => (
               <TabsTrigger
                 key={tab.label}
